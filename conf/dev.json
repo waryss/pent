@@ -1,0 +1,31 @@
+{
+	"port": 8088,
+	"bodyLimit": "100kb",
+	"corsHeaders": ["Link"],
+	"es": {
+		"url" : "localhost:9200",
+		"log": "trace",
+		"indexs" : {
+			"needs" : {
+				"index" : "needs",
+				"type" : "need"
+			},
+			"users" : {
+				"index" : "users",
+				"type" : "user"
+			},
+			"recipients" : {
+				"index" : "recipients",
+				"type" : "recipient"
+			}
+		},
+		"requestTimeout": "3000"
+	},
+	"nodemailer" : {
+		"service": "gmail",
+		"auth": {
+			"user": "mbugujude",
+			"pass": "judejude90"
+		}
+	}
+}
