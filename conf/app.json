@@ -1,5 +1,6 @@
 {
-	"port": 8088,
+	"port": 80,
+	"name": "pentApp",
 	"bodyLimit": "100kb",
 	"corsHeaders": ["Link"],
 	"es": {
@@ -13,19 +14,11 @@
 			"users" : {
 				"index" : "users",
 				"type" : "user"
-			},
-			"recipients" : {
-				"index" : "recipients",
-				"type" : "recipient"
 			}
 		},
 		"requestTimeout": "3000"
 	},
 	"nodemailer" : {
-		"service": "gmail",
-		"auth": {
-			"user": "mbugujude",
-			"pass": "judejude90"
-		}
+		"service": "gmail"
 	}
 }

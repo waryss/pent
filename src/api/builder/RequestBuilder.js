@@ -11,11 +11,16 @@ export default class RequestBuilder {
 	}
 
 	buildCreateQuery(index, type, body) {
+		body.creationDate = new Date();
 		return { index, type, id: UIDUtil.guid(), body };
 	}
 
 	buildGetQuery(index, type, id) {
 		return { index, type, id };
+	}
+
+	buildMatchQuery(index, type, match) {
+		return { index, type, body: { query: { match: match } } };
 	}
 
 }

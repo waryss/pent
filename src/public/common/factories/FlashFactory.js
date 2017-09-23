@@ -2,6 +2,8 @@ angular.module('pentApp')
 .factory('flashFactory', function($http, Flash){
 
   return {
+    onFromInvalid : onFromInvalid,
+    onExistingEmail : onExistingEmail,
     onSendFormNeed : onSendFormNeed,
     onErrorFromApi : onErrorFromApi
   };
@@ -12,8 +14,18 @@ angular.module('pentApp')
   }
 
   function onErrorFromApi(error){
-    console.log(error);
     var message = `<strong> ${error.statusText} || ${error.message} </strong> ${error.data}`;
+    Flash.create('danger', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+  }
+
+  function onFromInvalid(){
+    var message = `<strong> Formulaire Invalid </strong>`;
+    Flash.create('warning', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+  }
+
+
+  function onExistingEmail(email){
+    var message = `<strong> L'adresse email ${email} est déjà utilisée </strong>`;
     Flash.create('danger', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
   }
 
