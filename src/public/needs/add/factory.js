@@ -4,6 +4,7 @@ angular.module('pentApp')
 .factory('addNeedFactory', function(apiFactory, flashFactory, Flash){
 
   return {
+    existsUserByEmail : existsUserByEmail,
     pushNeed : pushNeed,
     pushUser : pushUser
   };
@@ -16,7 +17,7 @@ angular.module('pentApp')
       'provided': {
         'name' : need.user.name,
         'phone' : need.user.phone,
-        'email' : need.user.email
+        'email' : need.user.mail
       },
       'provider': {}
     }
@@ -30,7 +31,7 @@ angular.module('pentApp')
       'lastName' : '',
       'name' : user.name,
       'phone' : user.phone,
-      'email' : user.email,
+      'email' : user.mail,
       'password' : user.password,
       'adress' : {},
       'creationdate' : new Date(),
@@ -38,6 +39,11 @@ angular.module('pentApp')
     }
 
     apiFactory.createUser(object).then(function(data) {}, flashFactory.onErrorFromApi);
+  }
+
+  function existsUserByEmail(email){
+    let query = `email:${email}`;
+    return apiFactory.searchUser(query);
   }
 
 });

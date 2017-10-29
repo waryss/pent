@@ -17,19 +17,50 @@ angular.module('pentApp.needs.add', ['ngRoute'])
   });
 }])
 
-.controller('AddNeedCtrl', function(addNeedFactory) {
+.controller('AddNeedCtrl', function(addNeedFactory, flashFactory) {
 
-  this.need = this.need || {};
+  const vm = this;
 
-  this.isWithAccountCreation = false;
-  this.title = "exprimez votre besoin";
+  vm.need = vm.need || {};
 
-  this.sendForm = function () {
-    if(this.isWithAccountCreation){
-      addNeedFactory.pushUser(this.need.user);
+  vm.isWithAccountCreation = false;
+  vm.title = "exprimez votre besoin";
+
+  vm.sendForm = function (object, isFromValid) {
+    if(isFromValid){
+      if(vm.isWithAccountCreation){
+        addNeedFactory.existsUserByEmail(vm.need.user.mail).then(
+          function(data) {
+            if(data.data && data.data[0] && data.data[0]._source && data[0]._source.email) {
+              flashFactory.onExistingEmail(vm.need.user.mail);
+            } else {
+              addNeedFactory.pushUser(vm.need.user);
+              addNeedFactory.pushNeed(vm.need);
+            }
+          },
+          function(err){
+            flashFactory.onExistingEmail(vm.need.user.mail);
+          }
+        );
+      } else {
+        addNeedFactory.pushNeed(object);
+      }
+      object = {};
+    } else {
+      flashFactory.onFromInvalid();
     }
-    addNeedFactory.pushNeed(this.need);
-
-    this.need = {};
   }
+
+  vm.checkEmail = function (email){
+    if(vm.isWithAccountCreation){
+      addNeedFactory.existsUserByEmail(vm.need.user.mail).then(
+        function(data) {
+          if(data.data && data.data[0] && data.data[0]._source && data.data[0]._source.email) {
+            flashFactory.onExistingEmail(vm.need.user.mail);
+          }
+        }, function(err){}
+      );
+    }
+  }
+
 });

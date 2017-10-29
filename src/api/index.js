@@ -2,7 +2,9 @@
 
 import { Router } from 'express';
 
-import genericRoute from './route/genericRoute';
+import UserRoute from './route/UserRoute';
+import NeedRoute from './route/NeedRoute';
+
 import { name, version, description, author, engines } from '../../package.json'
 
 export default ({ config, db, app }) => {
@@ -12,7 +14,7 @@ export default ({ config, db, app }) => {
 		res.json({ name, version, description, author, engines });
 	});
 
-	api.get('/ping', (req, res) => {
+	api.get('/health', (req, res) => {
 		db.ping({
 			requestTimeout: config.es.requestTimeout
 		}, function (error) {
@@ -24,9 +26,8 @@ export default ({ config, db, app }) => {
 		});
 	});
 
-	app.use('/api/needs', genericRoute({ db, 'index' : config.es.indexs.needs, config }));
-	app.use('/api/users', genericRoute({ db, 'index' : config.es.indexs.users, config }));
-	app.use('/api/recipients', genericRoute({ db, 'index' : config.es.indexs.recipients, config }));
+	app.use('/api/users', new UserRoute({ db, 'index' : config.es.indexs.users, config }));
+	app.use('/api/needs', new NeedRoute({ db, 'index' : config.es.indexs.needs, config }));
 
 	return api;
 }

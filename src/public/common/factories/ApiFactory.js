@@ -3,7 +3,9 @@ angular.module('pentApp')
 
   return {
     createNeed : createNeed,
-    createUser : createUser
+    createUser : createUser,
+    searchNeed : searchNeed,
+    searchUser : searchUser
   };
 
   function createNeed(need) {
@@ -12,6 +14,14 @@ angular.module('pentApp')
 
   function createUser(user) {
     return $http.post('/api/users', user, null);
+  }
+
+  function searchNeed(query) {
+    return $http.get(`/api/needs?query=${query}`, null);
+  }
+
+  function searchUser(query) {
+    return $http.get(`/api/users?query=${query}`, null);
   }
 
 });
