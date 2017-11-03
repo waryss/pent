@@ -1,23 +1,15 @@
 'use strict'
 
-angular.module('pentApp.needs.add', ['ngRoute'])
+angular.module('pentApp.needs.send', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/needs/add', {
-    templateUrl: '/needs/add/',
-    controller: 'AddNeedCtrl'
-  });
-  $routeProvider.when('/', {
-    templateUrl: '/needs/add/',
-    controller: 'AddNeedCtrl'
-  });
-  $routeProvider.when('/#', {
-    templateUrl: '/needs/add/',
-    controller: 'AddNeedCtrl'
+  $routeProvider.when('/needs/send', {
+    templateUrl: '/needs/send/',
+    controller: 'sendNeedCtrl'
   });
 }])
 
-.controller('AddNeedCtrl', function(addNeedFactory, flashFactory) {
+.controller('sendNeedCtrl', function(sendNeedFactory, flashFactory) {
 
   const vm = this;
 
@@ -29,13 +21,13 @@ angular.module('pentApp.needs.add', ['ngRoute'])
   vm.sendForm = function (object, isFromValid) {
     if(isFromValid){
       if(vm.isWithAccountCreation){
-        addNeedFactory.existsUserByEmail(vm.need.user.mail).then(
+        sendNeedFactory.existsUserByEmail(vm.need.user.mail).then(
           function(data) {
             if(data.data && data.data[0] && data.data[0]._source && data[0]._source.email) {
               flashFactory.onExistingEmail(vm.need.user.mail);
             } else {
-              addNeedFactory.pushUser(vm.need.user);
-              addNeedFactory.pushNeed(vm.need);
+              sendNeedFactory.pushUser(vm.need.user);
+              sendNeedFactory.pushNeed(vm.need);
             }
           },
           function(err){
@@ -43,7 +35,7 @@ angular.module('pentApp.needs.add', ['ngRoute'])
           }
         );
       } else {
-        addNeedFactory.pushNeed(object);
+        sendNeedFactory.pushNeed(object);
       }
       object = {};
     } else {
@@ -53,7 +45,7 @@ angular.module('pentApp.needs.add', ['ngRoute'])
 
   vm.checkEmail = function (email){
     if(vm.isWithAccountCreation){
-      addNeedFactory.existsUserByEmail(vm.need.user.mail).then(
+      sendNeedFactory.existsUserByEmail(vm.need.user.mail).then(
         function(data) {
           if(data.data && data.data[0] && data.data[0]._source && data.data[0]._source.email) {
             flashFactory.onExistingEmail(vm.need.user.mail);
@@ -62,5 +54,9 @@ angular.module('pentApp.needs.add', ['ngRoute'])
       );
     }
   }
+
+  vm.login = function (email, password){
+    console.log("isValid = "+isValid+"   ---- "+email+" && "+password);
+  };
 
 });

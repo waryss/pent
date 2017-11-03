@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('pentApp')
-.factory('addNeedFactory', function(apiFactory, flashFactory, Flash){
+.factory('addNeedFactory', function(apiFactory, flashFactory, Flash, md5){
 
   return {
     existsUserByEmail : existsUserByEmail,
@@ -32,7 +32,7 @@ angular.module('pentApp')
       'name' : user.name,
       'phone' : user.phone,
       'email' : user.mail,
-      'password' : user.password,
+      'password' : md5.createHash(user.password),
       'adress' : {},
       'creationdate' : new Date(),
       'actif' : false,
