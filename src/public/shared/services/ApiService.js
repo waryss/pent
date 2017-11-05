@@ -1,5 +1,5 @@
 angular.module('pentApp')
-.factory('apiFactory', function($http, Flash){
+.service('apiService', function($http){
 
   return {
     createNeed : createNeed,

@@ -688,16 +688,6 @@ img {
 svg:not(:root) {
     overflow: hidden
 }
-button,
-input,
-optgroup,
-select,
-textarea {
-    font-family: sans-serif;
-    font-size: 100%;
-    line-height: 1.15;
-    margin: 0
-}
 button {
     overflow: visible
 }
@@ -724,9 +714,7 @@ button::-moz-focus-inner {
 button:-moz-focusring {
     outline: 1px dotted ButtonText
 }
-input {
-    overflow: visible
-}
+
 [type=checkbox],
 [type=radio] {
     box-sizing: border-box;
@@ -1073,62 +1061,6 @@ a.stButton:hover {
     font-weight: 500;
     color: #bec2c2
 }
-input[type=checkbox],
-input[type=radio] {
-    position: absolute;
-    height: 18px;
-    width: 18px;
-    top: 14px;
-    left: 0;
-    border: 1px solid #dce0e0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    outline: 0;
-    cursor: pointer
-}
-input[type=checkbox]:checked,
-input[type=radio]:checked {
-    border: 1px solid #000;
-    background-color: #000;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    outline: 0
-}
-input[type=checkbox]:checked:before,
-input[type=radio]:checked:before {
-    position: absolute;
-    font-size: 2.4rem;
-    font-family: stootie;
-    content: "\e949";
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff
-}
-input[type=radio] {
-    border-radius: 50%
-}
-input[type=checkbox] {
-    border-radius: 4px
-}
-textarea {
-    width: 100%;
-    max-width: 100%;
-    padding: 2.4rem;
-    border-radius: 0;
-    border-bottom: 1px solid #dce0e0
-}
-textarea:focus {
-    border-bottom: 1px solid #bec2c2
-}
-label {
-    display: block;
-    margin: 0;
-    color: #000;
-    cursor: pointer
-}
 [type=color].is-invalid-input,
 [type=color].u-error,
 [type=date].is-invalid-input,
@@ -1272,13 +1204,6 @@ textarea.u-error-message:after {
     [type=week]:focus {
         border: 1px solid #bec2c2;
         box-shadow: none
-    }
-    textarea {
-        border-radius: 6px;
-        border: 1px solid #dce0e0
-    }
-    textarea:focus {
-        border: 1px solid #bec2c2
     }
     [type=color].is-invalid-input,
     [type=color].u-error,
