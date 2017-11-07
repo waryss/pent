@@ -13,7 +13,7 @@ export default class NeedRoute extends Router{
 		this.response = new ResponseHelper();
 
 		this.post('/', (req, res, next) => {
-			if(req && req.body && req.body.email){
+			if(req && req.body && req.body.provided.email){
 				this.needService.register(res, req.body);
 			} else{
 				let returnCode = ResponseHelper.RETURN_CODE.ERR_TEC_MISSING_REQUEST_PAYLOAD;

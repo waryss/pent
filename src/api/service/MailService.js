@@ -73,10 +73,10 @@ export default class MailService {
 											 Un nouveau besoin a été vient d'être posté sur site Providence
 
 											 Informations sur le besoin :
-											 		Personne : ${need.name}
-													Adresse email: ${need.email}
-													Téléphone : ${need.phone}
-													Message : ${need.details}
+											 		Personne : ${need.provided.name}
+													Adresse email: ${need.provided.email}
+													Téléphone : ${need.provided.phone}
+													Message : ${need.detail}
 													Marque : ${need.brand}
 
  											 A très bientot
@@ -86,10 +86,10 @@ export default class MailService {
 											 Un nouveau besoin a été vient d'être posté sur site Providence
 											 <br/><br/>
 											 Informations sur le besoin :<br/>
-											 		<b>Nom : </b> ${need.name} <br/>
-													<b>Email : </b> ${need.email} <br/>
-													<b>Téléphone : </b> ${need.phone} <br/>
-													<b>Message : </b> ${need.details} <br/><br/>
+											 		<b>Nom : </b> ${need.provided.name} <br/>
+													<b>Email : </b> ${need.provided.email} <br/>
+													<b>Téléphone : </b> ${need.provided.phone} <br/>
+													<b>Message : </b> ${need.detail} <br/><br/>
 													<b>Marque : </b> ${need.brand} <br/><br/>
 
  											 A très bientot<br/>

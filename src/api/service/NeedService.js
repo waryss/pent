@@ -19,8 +19,8 @@ export default class NeedService{
 		try{
 			let query = this.builder.buildCreateQuery(this.index, this.type, need);
 			this.db.create(query).then(this.response.onSuccess(res), this.response.onError(res));
-			if (need.email){
-				this.mail.confirmNeedSending({ 'name' : need.name, 'email' : need.email});
+			if (need.provided.email){
+				this.mail.confirmNeedSending({ 'name' : need.provided.name, 'email' : need.provided.email});
 				this.mail.notifySalePersons(need);
 			}
 		} catch(e){

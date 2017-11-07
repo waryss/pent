@@ -7,11 +7,8 @@ angular.module('pentApp')
       onSubmit : '&'
     },
     controller: function ($scope, apiService, flashService) {
-
-      vm.need = vm.need || {};
-      $scope.submit = function () {
-        console.log('Gooder');
-        alert('Good');
+      $scope.submit = function (need) {
+        console.log(need);
         let object = {
           'creationdate' : new Date(),
           'status' : 1,
